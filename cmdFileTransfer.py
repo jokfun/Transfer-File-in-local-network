@@ -7,13 +7,15 @@
 
 import socket
 import sys
-import tqdm
 import os
 from random import randint
+import subprocess
 
 #Get the adress of the computer and a new port
-hostname = socket.gethostname()    
-ADRESS = socket.gethostbyname(hostname)
+hostname = socket.gethostname()
+ADRESS = socket.gethostbyname(socket.getfqdn())
+if ADRESS == '127.0.1.1':
+    ADRESS = subprocess.getoutput("hostname -I")
 PORT = randint(1000,9999)
 
 def askFile():
